@@ -21,6 +21,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null);
 
   const login = useCallback(async (email: string, password: string) => {
+    console.log("LOGIN CLICKED");
     const { data } = await api.post("/auth/login", { email, password });
     tokenStore.set(data.accessToken, data.refreshToken);
     setUser(data.user);
@@ -29,7 +30,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = useCallback(async () => {
     const refreshToken = tokenStore.getRefresh();
     if (refreshToken) {
-      await api.post("/auth/logout", { refreshToken }).catch(() => {});
+      await api.post("/auth/logout", { refreshToken }).catch(() => { });
     }
     tokenStore.clear();
     setUser(null);
