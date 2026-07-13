@@ -73,6 +73,7 @@ export default function LoginPage() {
             type="submit"
             disabled={isSubmitting}
             className="w-full rounded-lg bg-brand text-white text-sm font-medium py-2.5 hover:bg-brand-dark transition disabled:opacity-60"
+            onClick={() => console.log("BUTTON CLICKED")}
           >
             {isSubmitting ? "Signing in…" : "Sign in"}
           </button>
