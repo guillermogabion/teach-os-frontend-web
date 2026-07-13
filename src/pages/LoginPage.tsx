@@ -23,6 +23,7 @@ export default function LoginPage() {
   } = useForm<FormValues>({ resolver: zodResolver(schema) });
 
   const onSubmit = async (values: FormValues) => {
+    console.log("ONSUBMIT FIRED", values);
     setServerError(null);
     try {
       await login(values.email, values.password);
