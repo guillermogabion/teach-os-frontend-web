@@ -17,7 +17,7 @@ export const tokenStore = {
 };
 
 export const api = axios.create({
-  baseURL: "baseURL: import.meta.env.VITE_API_URL",
+  baseURL: import.meta.env.VITE_API_URL,
 });
 
 api.interceptors.request.use((config) => {
@@ -34,7 +34,7 @@ async function refreshAccessToken(): Promise<string> {
   const refreshToken = tokenStore.getRefresh();
   if (!refreshToken) throw new Error("No refresh token available");
 
-  const { data } = await axios.post("/api/auth/refresh", { refreshToken });
+  const { data } = await api.post("/api/auth/refresh", { refreshToken });
   tokenStore.set(data.accessToken, data.refreshToken);
   return data.accessToken;
 }
